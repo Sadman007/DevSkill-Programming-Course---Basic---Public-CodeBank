@@ -148,8 +148,96 @@ void RadixSort(int *arr,int n)
     }
 }
 
+void Sort(int *arr,int L,int M,int R)
+{
+    int s1 = M-L+1;
+    int s2 = R-M;
+
+    int v1[s1],v2[s2];
+
+    for(int i=0;i<s1;i++)
+    {
+        v1[i] = arr[L+i];
+    }
+    for(int i=0;i<s2;i++)
+    {
+        v2[i] = arr[M+1+i];
+    }
+    int i,j,k;
+    i = j = 0;
+    k = L;
+
+    while(i<(s1) && j<(s2))
+    {
+        if(v1[i]<=v2[j])
+        {
+            arr[k++] = v1[i];
+            i++;
+        }
+        else
+        {
+            arr[k++] = v2[j];
+            j++;
+        }
+    }
+    while(i<s1)
+    {
+        arr[k++] = v1[i++];
+    }
+    while(j<s2)
+    {
+        arr[k++] = v2[j++];
+    }
+}
+
+void MergeSort(int *arr,int L,int R)
+{
+    if(L<R)
+    {
+        int M = L+(R-L)/2;
+        MergeSort(arr,L,M);
+        MergeSort(arr,M+1,R);
+        Sort(arr,L,M,R);
+    }
+}
+
+
+void MapSort(int *arr,int n)
+{
+    map<int,int>mp;
+    int idx = 0;
+    for(int i=0;i<n;i++) mp[arr[i]]++;
+    for(auto it : mp)
+    {
+        int cnt = it.second;
+        while(cnt--) arr[idx++] = it.first;
+    }
+}
+
+void SetSort(int *arr,int n)
+{
+    multiset<int>st;
+    int idx = 0;
+    for(int i=0;i<n;i++) st.insert(arr[i]);
+    for(auto it : st)
+    {
+        arr[idx++] = it;
+    }
+}
 int arr[5000010];
 int sz[] = {5,50,500,5000,50000,100000,150000,200000,250000,300000,350000,400000,450000,500000};
+
+bool sortValidity(int *a,int n)
+{
+    int a2[n+1];
+    for(int i=0;i<n;i++) a2[i] = a[i];
+    sort(a2,a2+n);
+    for(int i=0;i<n;i++)
+    {
+        if(a2[i]!=a[i]) return 0;
+    }
+    return 1;
+}
 
 int main()
 {
@@ -164,8 +252,12 @@ int main()
         //SelectionSort(arr,sz[idx]);
         //InsertionSort(arr,sz[idx]);
         //BubbleSort(arr,sz[idx]-1);
-        CountingSort(arr,sz[idx]-1);
+        //CountingSort(arr,sz[idx]-1);
         //RadixSort(arr,sz[idx]);
+        //MergeSort(arr,0,sz[idx]-1);
+        MapSort(arr,sz[idx]);
+        //SetSort(arr,sz[idx]);
+        //if(!sortValidity(arr,sz[idx])) puts("ERROR");
         auto en = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(en - st);
         cout << sz[idx] << ": " << duration.count() << " " << duration.count()/1000.0 << "\n";
