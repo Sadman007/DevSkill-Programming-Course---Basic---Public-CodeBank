@@ -1,16 +1,13 @@
 /**
-
-Introduction to Graph - DFS
-
+    Introduction to Graph - DFS
 **/
-
 
 /**
 Application of DFS:
 1) Detecting cycle in a graph
 2) Path Finding
 3) SubTree size counting
-4) 2D grid visiting
+4) 2D grid visiting (1115 - Filling the Regions)
 5) FloodFill
 6) Topological Sorting
 7) Bipartite testing
@@ -18,6 +15,7 @@ Application of DFS:
 9) Puzzle solving
 ... and many more!
 **/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -38,9 +36,25 @@ void printGraph()
     }
 }
 
+bool vis[10000];
+
+void dfs(int u)
+{
+    vis[u] = 1;
+    for(auto v : adjacencyList[u])
+        if(vis[v]==0)
+            dfs(v);
+
+}
+/**
+**/
 
 int main()
 {
+    string s = "sakib";
+    s[0] = 'r';
+    cout << s  << "\n";
+
     printf("Enter the number of vertices\n");
     scanf("%d",&V);
     printf("Enter the number of edges\n");
