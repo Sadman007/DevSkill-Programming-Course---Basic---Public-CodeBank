@@ -1,10 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define INF 100000000
+#define INF 1000000000000
+#define MAX 500000
+#define ll long long
 
 struct node
 {
-    int v,cost;
+    ll v,cost;
     node(){}
     node(int _v,int _c)
     {
@@ -19,20 +21,24 @@ struct node
 
 priority_queue< node , vector<node> , greater<node> > pq;
 
-vector<int>gr[100],cost[100];
-int dist[100];
+vector<int>gr[MAX+10],cost[MAX+10];
+ll dist[MAX+10];
+int par[MAX+10];
 
 void init()
 {
-    for(int i=0;i<100;i++) dist[i] = INF;
-    for(int i=0;i<100;i++) gr[i].clear();
-    for(int i=0;i<100;i++) cost[i].clear();
+    for(int i=0;i<MAX;i++) dist[i] = INF;
+    for(int i=0;i<MAX;i++) gr[i].clear();
+    for(int i=0;i<MAX;i++) cost[i].clear();
+    for(int i=0;i<MAX;i++) par[i] = -1;
 }
 
 void Dijkstra(int src)
 {
     pq.push(node(src,0));
+    pq.push(node(src2,0));
     dist[src] = 0;
+    dist[src2] = 0;
 
     while(!pq.empty())
     {
@@ -45,6 +51,7 @@ void Dijkstra(int src)
             int v = gr[u][i];
             if((dist[u] + cost[u][i]) < dist[v])
             {
+                par[v] = u;
                 dist[v] = dist[u]+cost[u][i];
                 pq.push(node(v,dist[v]));
             }
@@ -52,15 +59,22 @@ void Dijkstra(int src)
     }
 }
 
+void printPath(int u)
+{
+    if(u==-1) return;
+    printPath(par[u]);
+    printf("%d ",u);
+}
+
 int main()
 {
     init();
     int n,m;
-    cin >> n >> m;
+    scanf("%d%d",&n,&m);
     for(int i=0;i<m;i++)
     {
         int a,b,c;
-        cin >> a >> b >> c;
+        scanf("%d%d%d",&a,&b,&c);
         gr[a].push_back(b);
         gr[b].push_back(a);
 
@@ -68,10 +82,8 @@ int main()
         cost[b].push_back(c);
     }
     Dijkstra(1);
-    for(int i=1;i<=n;i++)
-    {
-        printf("%d : %d\n",i,dist[i]);
-    }
+    if(dist[n]==INF) puts("-1");
+    else printPath(n);
     return 0;
 }
 
