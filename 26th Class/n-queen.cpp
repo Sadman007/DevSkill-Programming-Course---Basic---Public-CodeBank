@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 10; /// size of grid
+const int N = 4; /// size of grid
 int totalCount;
 
 int grid[N][N];
