@@ -1,26 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int W[1000];
-int val[1000];
+int W[1020];
+int val[1020];
 int totW,N;
-int dp[1000][1000];
+int dp[1020][1020];
 
-int knapsack(int pos,int w)
+int f(int pos,int w)
 {
-    if(pos<0 || w<=0) return 0;
-    if(dp[pos][w]!=-1) return dp[pos][w];
-    if(W[pos-1]>w) return dp[pos][w] = knapsack(pos-1,w);
-    else return dp[pos][w] = max(val[pos]+knapsack(pos-1,w-W[pos]),knapsack(pos-1,w));
-
+    if(pos>=N)
+    {
+        if(w>=0)
+            return 0;
+        return -1000000;
+    }
+    if(w<0)
+        return -1000000;
+    if(dp[pos][w]!=-1)
+        return dp[pos][w];
+    return dp[pos][w] = max(val[pos]+f(pos+1,w-W[pos]),f(pos+1,w));
 }
 
 int main()
 {
-    cin >> N >> totW;  ///3 50
-    for(int i=0;i<N;i++) cin >> val[i]; /// 100 150 90
-    for(int i=0;i<N;i++) cin >> W[i];   /// 10 20 30
-    memset(dp,-1,sizeof dp);
-    cout << knapsack(N-1,totW);
+    scanf("%d%d",&N,&totW);  ///3 50
+    for(int i=0; i<N; i++)
+        scanf("%d",&val[i]); /// 100 150 90
+    for(int i=0; i<N; i++)
+        scanf("%d",&W[i]);  /// 10 20 30
+
+    for(int i=0; i<=N; i++)
+    {
+        for(int j=0; j<=N; j++)
+        {
+            dp[i][j] = -1;
+        }
+    }
+
+    cout << f(0,totW) << "\n";
     return 0;
 }
