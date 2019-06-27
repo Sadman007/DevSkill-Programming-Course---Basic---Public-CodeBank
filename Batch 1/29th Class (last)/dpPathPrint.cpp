@@ -8,7 +8,7 @@ int dp[1020][1020];
 
 int f(int pos,int w)
 {
-    if(pos>=N)
+    if(pos<0)
     {
         if(w>=0)
             return 0;
@@ -18,8 +18,22 @@ int f(int pos,int w)
         return -1000000;
     if(dp[pos][w]!=-1)
         return dp[pos][w];
-    return dp[pos][w] = max(val[pos]+f(pos+1,w-W[pos]),f(pos+1,w));
+    int r1 = val[pos]+f(pos-1,w-W[pos]);
+    int r2 = f(pos-1,w);
+    return dp[pos][w] = max(r1,r2);
 }
+
+void printSol(int pos,int w,int res)
+{
+    if(pos<0 || res<0 || w<0) return;
+    if(res == dp[pos-1][w]) printSol(pos-1,w,res);
+    else
+    {
+        printf("%d ",W[pos]);
+        printSol(pos-1,w-W[pos],res-val[pos]);
+    }
+}
+
 
 int main()
 {
@@ -29,14 +43,16 @@ int main()
     for(int i=0; i<N; i++)
         scanf("%d",&W[i]);  /// 10 20 30
 
-    for(int i=0; i<=N; i++)
-    {
-        for(int j=0; j<=totW; j++)
-        {
-            dp[i][j] = -1;
-        }
-    }
+    memset(dp,-1,sizeof dp);
+    int res = f(N,totW);
+    printf("RES %d\n",res);
+    printSol(N,totW,res);
 
-    cout << f(0,totW) << "\n";
     return 0;
 }
+
+/**
+3 50
+100 150 90
+10 20 30
+**/
