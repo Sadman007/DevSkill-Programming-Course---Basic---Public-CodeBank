@@ -1,62 +1,59 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 string s1,s2;
-int dp[10][10];
-int path[10][10];
+int dp[1010][1010];
+int path[1010][1010];
 
-int f(int n,int m)
+int f(int a,int b)
 {
-    if(n<0 || m<0)
+    if(a<0 or b<0)
         return 0;
-    if(dp[n][m]!=-1)
-        return dp[n][m];
-
-    if(s1[n]==s2[m])
+    if(dp[a][b]!=-1)
+        return dp[a][b];
+    if(s1[a] == s2[b])
     {
-        path[n][m] = 3;
-        return dp[n][m] = 1+f(n-1,m-1);
+        path[a][b] = 3;
+        return dp[a][b] = 1+f(a-1,b-1);
     }
     else
     {
-        int r1 = f(n-1,m);
-        int r2 = f(n,m-1);
-        if(r1>r2)
-            path[n][m] = 1;
-        else
-            path[n][m] = 2;
-        return dp[n][m] = max(r1,r2);
+        ///return dp[a][b] = max(f(a-1,b),f(a,b-1));
+        int r1 = f(a-1,b);
+        int r2 = f(a,b-1);
+        if(r1>r2) path[a][b] = 2;
+        else path[a][b] = 1;
+        return dp[a][b] = max(r1,r2);
     }
 }
 
-void solPrint(int n,int m)
+
+void printResult(int a,int b)
 {
-    if(n<0 || m<0)
-        return;
-    if(path[n][m]==3)
+    if(a<0 || b<0) return;
+    if(path[a][b] == 3)
     {
-        solPrint(n-1,m-1);
-        cout << s1[n];
+        printResult(a-1,b-1);
+        cout << s1[a];
     }
-    else if(path[n][m]==1)
+    else if(path[a][b] == 2)
     {
-        solPrint(n-1,m);
+        printResult(a-1,b);
     }
-    else if(path[n][m]==2)
+    else if(path[a][b] == 1)
     {
-        solPrint(n,m-1);
+        printResult(a,b-1);
     }
 }
 
 int main()
 {
     cin >> s1 >> s2;
-    memset(dp,-1,sizeof dp);
     int n,m;
-    n=s1.size();
-    m=s2.size();
-    cout << f(n-1,m-1) << endl;
-    solPrint(n-1,m-1);
+    n = s1.size();
+    m = s2.size();
+    memset(dp,-1,sizeof dp);
+    cout << f(n-1,m-1) << "\n";
+    printResult(n-1,m-1);
     return 0;
 }
