@@ -6,9 +6,6 @@ int arr[1000000];
 
 void QuickSort(int *arr,int lo,int hi) /// sort the array "arr" from index "lo" to "hi" inclusive
 {
-    /// middle ---> 3
-    /// lo
-    /// hi
     int pivot = arr[(lo+hi)/2];
     int L = lo;
     int R = hi;
