@@ -29,10 +29,6 @@ void f(int pos, int rem)
 
 int main()
 {
-    unsigned int a = 324583975;
-    unsigned int b = 43549654;
-    unsigned int c = (a * b);
-    cout << c << endl;
     n = 3;
     for(int i = 0; i < n; i++) cin >> arr[i];
     f(0,8);
