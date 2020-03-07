@@ -16,7 +16,7 @@ void pre() /// O(N)
     {
         H[i] = ((bs * H[i - 1]) + str[i]);
         if(H[i] > MOD)
-            H[i] -= MOD;
+            H[i] %= MOD;
     }
 }
 
@@ -27,7 +27,7 @@ ll getHash(int L, int R) /// O(1)
     ll left = H[R];
     ll right = (H[L - 1] * po[R - L + 1]);
     if(right > MOD)
-        right -= MOD;
+        right %= MOD;
     return (left - right + MOD) % MOD;
 }
 
@@ -39,7 +39,7 @@ ll get_T_hash()
     {
         h = ((h * bs) + T[i]);
         if(h > MOD)
-            h -= MOD;
+            h %= MOD;
     }
     return (h + MOD) % MOD;
 }
@@ -52,7 +52,7 @@ int main()
     {
         po[i] = (bs * po[i - 1]);
         if(po[i] > MOD)
-            po[i] -= MOD;
+            po[i] %= MOD;
     }
 
     int t, cs = 1;
