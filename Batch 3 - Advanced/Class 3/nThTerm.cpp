@@ -12,29 +12,18 @@ struct matrix
     matrix()
     {
         r = c = 1;
-        for(int i = 0; i < r; i++)
-        {
-            for(int j = 0; j < c; j++)
-            {
-                data[i][j] = 0;
-            }
-        }
+        memset(data,0,sizeof(data));
     }
     matrix(int _r, int _c)
     {
         r = _r;
         c = _c;
-        for(int i = 0; i < r; i++)
-        {
-            for(int j = 0; j < c; j++)
-            {
-                data[i][j] = 0;
-            }
-        }
+        memset(data,0,sizeof(data));
     }
     void identity()
     {
         if(r != c) return;
+        memset(data,0,sizeof(data));
         for(int i = 0; i < r; i++)
         {
             data[i][i] = 1;
@@ -63,19 +52,11 @@ struct matrix
     {
         matrix res;
         res.identity();
-        matrix x(r,c);
-        for(int i = 0; i < r; i++)
-        {
-            for(int j = 0; j < c; j++)
-            {
-                x.data[i][j] = data[i][j];
-            }
-        }
         while(expo > 0)
         {
-            if(expo & 1) res = res * x;
+            if(expo & 1) res = res * (*this);
             expo = expo >> 1;
-            x = x * x;
+            (*this) = (*this) * (*this);
         }
         return res;
     }
