@@ -41,10 +41,7 @@ int main()
 {
 	int n = 10;
 	int arr[11];
-	for(int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
+	for(int i = 0; i < n; i++) cin >> arr[i];
 	for(int i = 0; i < n; i++) cout << arr[i] << " "; cout << "\n";
 	CountingSort(arr, n);
 	for(int i = 0; i < n; i++) cout << arr[i] << " ";
