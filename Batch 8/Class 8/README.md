@@ -1,4 +1,5 @@
 <b>Tutorials/Visualizations:</b>
+
 Insertion Sort: https://www.youtube.com/watch?v=OGzPmgsI-pQ
 Counting Sort: https://www.youtube.com/watch?v=7zuGmKfUt7s
 
