@@ -9,12 +9,12 @@ int main()
 	long long sum = 0;
 	for(char x : s)
 	{
-		sum += (x-'0');
+		sum += (x - '0');
 	}
 	sum *= k;
 	if(sum % 9 == 0)
 		cout<<'9'<<endl;
 	else
-		cout<< sum%9 <<endl;
+		cout<< sum % 9 <<endl;
 	return 0;
 }
