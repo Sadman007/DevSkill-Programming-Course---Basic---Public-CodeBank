@@ -25,9 +25,33 @@ void iter_LIS()
     cout << max_len << "\n";
 }
 
+int n, arr[1000], dp[1010][1010];
+
+int f(int pos, int prv)
+{
+	if(pos == n) return 0;
+	if(prv >= 0 && dp[pos][prv] != -1) return dp[pos][prv];
+	int add, notAdd;
+	add = notAdd = 0;
+	if(prv < 0 || arr[pos] > arr[prv])
+		add = 1 + f(pos + 1, pos);
+	notAdd = f(pos + 1, prv);
+	dp[pos][prv] = max(add, notAdd);
+	return dp[pos][prv];
+}
+
+void recur_LIS()
+{
+    cin >> n;
+	for(int i = 0; i < n; i++)
+		cin >> arr[i];
+	memset(dp, -1, sizeof(dp));
+	cout << f(0, -1) << "\n";
+}
+
 int main()
 {
     iter_LIS();
-
+    recur_LIS();
     return 0;
 }
