@@ -14,16 +14,8 @@ bool isDistinct(int num)
 
 int main()
 {
-    int year;
-    cin >> year;
-    for(int i = year + 1; ; i++)
-    {
-        if(isDistinct(i))
-        {
-            cout << i << "\n";
-            return 0;
-        }
-    }
-
+    double a;
+    scanf("%lf", &a);
+    printf("%lf\n", a);
     return 0;
 }
