@@ -85,8 +85,8 @@ int main()
         mb.mat[0][0] = p;
         mb.mat[1][0] = 2;
 
-        matrix mc = (ma ^ (n - 1)) * mb;
-        cout << "Case " << cs++ << ": " << mc.mat[0][0] << "\n";
+        matrix mc = (ma ^ n) * mb;
+        cout << "Case " << cs++ << ": " << mc.mat[1][0] << "\n";
         //printf("Case %d: %llu\n",cs++, mc.mat[0][0]);
     }
     return 0;
