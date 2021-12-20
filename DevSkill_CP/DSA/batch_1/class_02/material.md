@@ -1,4 +1,4 @@
-Make sure you have completed the following topics properly before the next class:
+### Make sure you have completed the following topics properly before the next class:
 
 1) Pointer in Bangla: https://www.youtube.com/watch?v=zl9hmnj7BZU
 2) Want to master the world of pointer by watching ONLY one video: https://www.youtube.com/watch?v=zuegQmMdy8M
@@ -6,7 +6,7 @@ Make sure you have completed the following topics properly before the next class
 4) Array vs Linked List: https://www.javatpoint.com/ds-array-vs-linked-list#:~:text=An%20array%20is%20a%20collection,the%20memory%20or%20randomly%20stored.
 
 
-For class 03, you can prepare yourself with the following materials:
+### For class 03, you can prepare yourself with the following materials:
 
 1) Stack: https://www.youtube.com/watch?v=I37kGX-nZEI
 2) Queue: https://www.youtube.com/watch?v=XuCbpw6Bj1U
