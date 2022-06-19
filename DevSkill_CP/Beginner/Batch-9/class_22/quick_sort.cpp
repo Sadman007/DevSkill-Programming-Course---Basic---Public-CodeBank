@@ -24,11 +24,10 @@ void quickSort(vector<int>&arr, int L, int R)
     int p = createPartition(arr, L, R);
     while(p > 0 && arr[p] == arr[p - 1]) --p;
     quickSort(arr, L, p - 1);
-    while(p < R && arr[p] == arr[p+1]) ++p;
+    while(p < R && arr[p] == arr[p + 1]) ++p;
     quickSort(arr, p + 1, R);
   }
 }
-//Compiler version g++ 6.3.0
  
 bool isValid(vector<int>&vc)
 {
