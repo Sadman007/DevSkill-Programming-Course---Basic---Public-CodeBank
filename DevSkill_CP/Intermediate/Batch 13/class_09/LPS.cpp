@@ -53,6 +53,19 @@ bool existsPalindrome(int len, vector<long long> &sH, vector<long long> &rsH, ve
     return false;
 }
 
+int findLPS(int L, int R, bool isOdd, vector<long long> &sH, vector<long long> &rsH, vector<long long> &po) {
+    while(L < R) {
+        int M = (L + R + 1) / 2;
+        if (!existsPalindrome(M + M + isOdd, sH, rsH, po)) {
+            R = M - 1;
+        }
+        else {
+            L = M;
+        }
+    }
+    return R + R + isOdd;
+}
+
 int main() {
     int cs = 1, T = 1;
     while(T--) {
@@ -69,30 +82,12 @@ int main() {
         // 2x + 1; x = 0, 1, 2, 3, 4, 5, 6, 7
         int L = 1, R = N - (N % 2 == 0), LPS = 1;
         L = 0, R = (R - 1) / 2;
-        while(L < R) {
-            int M = (L + R + 1) / 2;
-            if (!existsPalindrome(M + M + 1, sH, rsH, po)) {
-                R = M - 1;
-            }
-            else {
-                L = M;
-            }
-        }
-        LPS = max(LPS, R + R + 1);
+        LPS = max(LPS, findLPS(L, R, true, sH, rsH, po));
 
         // EVEN
         L = 0, R = N - (N % 2 == 1);
         R = R / 2;
-        while(L < R) {
-            int M = (L + R + 1) / 2;
-            if (!existsPalindrome(M + M, sH, rsH, po)) {
-                R = M - 1;
-            }
-            else {
-                L = M;
-            }
-        }
-        LPS = max(LPS, R + R);
+        LPS = max(LPS, findLPS(L, R, false, sH, rsH, po));
         printf("%d\n", LPS);
     }
     return 0;
