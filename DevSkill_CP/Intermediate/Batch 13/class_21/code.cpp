@@ -5,7 +5,7 @@ const int MAX = 100;
 vector<int> gr[MAX + 5];
 vector<int> dist;
 
-void bfs(vector<int> &srcs, int n)
+void bfs(vector<int> srcs, int n)
 {
     dist.clear();
     dist.resize(n + 1, INT_MAX / 2);
@@ -41,7 +41,7 @@ int main()
         gr[u].push_back(v);
         gr[v].push_back(u);
     }
-    bfs({1}, n);
+    bfs({1, 7}, n);
     for (int i = 1; i <= n; i++)
     {
         cout << "dist: " << i << " " << dist[i] << "\n";
