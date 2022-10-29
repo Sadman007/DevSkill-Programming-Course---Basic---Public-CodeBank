@@ -40,9 +40,9 @@ int main()
 /**
 vector<int> dp(W + 1, 0);
 
-for (int w = 0; w <= W; w++)
+for (int i = 0; i < n; i++)
 {
-    for (int i = 0; i < n; i++)
+    for (int w = W; w >= 1; w--)
     {
         dp[w] = max(dp[w], dp[w - weight[i]] + v[i]);
     }
