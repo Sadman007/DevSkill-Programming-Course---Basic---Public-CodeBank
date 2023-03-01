@@ -66,14 +66,24 @@ void merge_sort(vector<int> &arr)
     cout << "inv count " << inv_count << "\n";
 }
 
+int get_rand_in_range(int L, int R)
+{
+    return L + (rng() % (R - L + 1));
+}
+
 int main()
 {
     vector<int> arr;
-    int n = 100000;
+    int n = 16;
     for (int i = 0; i < n; i++)
     {
-        arr.push_back(n - i);
+        arr.push_back(get_rand_in_range(-5, 25));
     }
+    for (auto elem : arr)
+    {
+        cout << elem << " ";
+    }
+    cout << endl;
     merge_sort(arr);
     if (is_sorted(arr.begin(), arr.end()))
     {
